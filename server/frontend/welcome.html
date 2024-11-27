@@ -1,0 +1,47 @@
+<!--
+Author: Austin Raben
+Description: The welcome page for Word Hunt, allowing users to enter their username,
+select a language (English or German), and navigate to the game or leaderboard
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Word Hunt - Welcome</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/welcomeStyle.css">
+    <script src="script/welcomeScript.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Welcome to </h1>
+        <h1>Daily Word Hunt</h1>
+    </header>
+
+    <!-- Form for Username, Language -->
+    <div id="content">
+        <form id="welcome-form">
+            <label for="username">Enter your username:</label>
+            <input type="text" id="username" name="username" required>
+            <div id="username-exists" class="hidden">
+                <p>This username already exists. Would you like to continue with this user?</p>
+                <button type="button" id="continue-btn">Yes</button>
+                <button type="button" id="cancel-btn">No</button>
+            </div>
+
+            <label for="language-select">Choose a language:</label>
+            <select id="language-select" name="language">
+                <option value="English" selected>English</option>
+                <option value="German">German</option>
+            </select>
+
+            <!-- Buttons Container Below Form -->
+            <div id="buttons">
+                <button type="submit" id="game-btn" disabled>Game</button>
+                <button type="button" id="leaderboard-btn" disabled>Leaderboard</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
