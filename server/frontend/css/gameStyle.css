@@ -1,0 +1,187 @@
+/* General body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #eaf7ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Header styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin-top: 20px;
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+header h2 {
+    margin: 0;
+}
+
+/* Timer styling */
+#timer {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Game container */
+#game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+/* Ready container */
+#ready-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+#ready-button {
+    padding: 15px 30px;
+    font-size: 24px;
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#ready-button:hover {
+    background-color: #005f99;
+}
+
+/* Hidden game board */
+#game-board.hidden {
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.selected {
+    background-color: #3498db;  /* Highlight selected letter (blue) */
+}
+
+.valid {
+    background-color: #2ecc71;  /* Valid word (green) */
+}
+
+.greyed-out {
+    background-color: #bdc3c7;  /* Invalid word (grey) */
+}
+
+
+/* Game grid */
+#game-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);  /* 4 columns of equal width */
+    grid-gap: 10px;
+    margin: 20px 0;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#game-grid div {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f1c40f;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
+}
+
+#game-grid div:hover {
+    background-color: #e67e22;
+}
+
+/* Word input */
+#word-input {
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+#current-word {
+    font-size: 24px;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+/* Results screen */
+#results-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+#results-modal.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+#results-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 50%;
+    border: 2px solid #ccc;
+}
+
+#results-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+#word-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#word-list li {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+#continue-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#continue-button:hover {
+    background-color: #45a049;
+}
