@@ -1,0 +1,54 @@
+<!--
+Description: The structure for the game interface for Word Hunt with the randomly
+generated 4x4 grid, the timer, and the user's score, and the result of the game
+displayed once the timer hits 0. 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Word Hunt - Game</title>
+    <link rel="stylesheet" href="css/gameStyle.css">
+</head>
+<body>
+    <header>
+        <div id="user-info">
+            <h2 id="username-display">Player: <span>Guest</span></h2>
+            <h2 id="word-count-display">Words: <span>0</span></h2>
+            <h2 id="score-display">Score: <span>0</span></h2>
+        </div>
+        <div id="timer">
+            <h2>Time Left: <span id="time-remaining">100</span>s</h2>
+        </div>
+    </header>
+
+    <div id="game-container">
+        <div id="ready-container">
+            <button id="ready-button">Ready</button>
+        </div>
+
+        <div id="game-board" class="hidden">
+            <div id="game-grid">
+                <!-- 4x4 grid will be dynamically generated -->
+            </div>
+            <div id="word-input">
+                <h3>Word:</h3>
+                <p id="current-word"></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="results-screen" class="hidden">
+        <div id="results-container">
+            <h2>Your Results</h2>
+            <ul id="word-list">
+                <!-- List of words and scores will be dynamically added here -->
+            </ul>
+            <button id="continue-button">Continue to Leaderboard</button>
+        </div>
+    </div>
+
+    <script src="script/gameScript.js"></script>
+</body>
+</html>
