@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     readyButton.addEventListener("click", () => {
         document.getElementById("ready-container").classList.add("hidden");
         gameBoard.classList.remove("hidden");
+        readyButton.style.display = 'none';
         generateGrid();  // Generate the grid
         findAllWords();  // Identify all valid words in the grid
         startTimer();    // Start the timer once the board is ready to be played
