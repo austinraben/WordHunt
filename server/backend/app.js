@@ -20,22 +20,21 @@ const Score = require('./scores');
 app.use(express.json());
 
 // Serve frontend static files
-app.use('/css', express.static(path.resolve('../frontend/css')));
-app.use('/script', express.static(path.resolve('../frontend/script')));
+app.use('/css', express.static(path.join(__dirname, '../frontend/css')));
+app.use('/script', express.static(path.join(__dirname, '../frontend/script')));
 
-// Serve the root HTML page using .sendFile and .resolve to ensure path is valid
-// By importing path, we prevent the Forbidden 404 Error
+// Serve the root HTML page
 app.get('/', (req, res) => {
-    res.sendFile(path.resolve('../frontend/index.html'));
+    res.sendFile(path.join(__dirname, '../frontend/index.html')); // Serving index.html at root path
 });
 
 // Serve game and leaderboard pages
 app.get('/game', (req, res) => {
-    res.sendFile(path.resolve('../frontend/game.html'));
+    res.sendFile(path.join(__dirname, '../frontend/game.html')); // Serving game.html
 });
 
 app.get('/leaderboard', (req, res) => {
-    res.sendFile(path.resolve('../frontend/leaderboard.html'));
+    res.sendFile(path.join(__dirname, '../frontend/leaderboard.html')); // Serving leaderboard.html
 });
 
 // Routes for creating users, saving scores, and retrieving data
