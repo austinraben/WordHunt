@@ -66,6 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const username = usernameInput.value.trim();  // Get the selected username
 
         // Redirect the user to the appropriate path with parameters in the URL
-        window.location.href = `http://337WordHunt.com/welcome/${mode}?lang=${language}&user=${username}`;
+        window.location.href = `http://localhost:5000/${mode}?lang=${language}&user=${username}`;
     }
 });
