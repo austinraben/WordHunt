@@ -1,7 +1,9 @@
-/*Author: Austin Raben, Maya Vanderpool
+/*
+Author: Austin Raben, Maya Vanderpool
 Description: Stylesheet for the game page of wordhunt. It creates the style 
 for the game size, layout, fonts, and background.
 */
+
 /* General body styling */
 body {
     font-family: 'Arial', sans-serif;

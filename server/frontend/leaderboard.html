@@ -1,4 +1,5 @@
-<!--Description: This is an HTML file that provides the structure for the
+<!--
+Description: This is an HTML file that provides the structure for the
 WordHunt leaderboard. This displays a user and their top score.
 -->
 
@@ -13,7 +14,15 @@ WordHunt leaderboard. This displays a user and their top score.
     <body>
         <header>
             <h1 id = leaderboard>Leaderboard</h1>
-            <h1 id = date>Date: Language:</h1>
+            <div id="options">
+                <select id="date-select" onchange="getDate()">
+                    <option value="t">Today</option>
+                </select>
+                <select id="language-select" onchange="getLanguage()">
+                    <option value="e">English</option>
+                    <option value="g">German</option>
+                </select>
+            </div>
         </header>
 
         <div id = box>

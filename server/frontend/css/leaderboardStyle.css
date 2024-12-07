@@ -1,3 +1,10 @@
+/*
+Author: Maya Vanderpool
+Description: Stylesheet for the leaderboard page of wordhunt. It creates the style 
+for the leaderboard, layout, fonts, and background.
+*/
+
+/* General style for the body*/
 body{
     margin:0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -7,21 +14,13 @@ body{
     flex-direction: column;
 }
 
+/* Page Title */
 #leaderboard{
     margin-top: 20px;
     text-align: center;
     font-size: 7vh;
     color:white;
-    text-shadow: 0 0 2px rgb(249, 5, 221);
-}
-
-#date{
-    align-content: left;
-    margin-left: 1vh;
-    font-size: 2vh;
-    margin-top: 10px;
-    color:white;
-    text-shadow: 0 0 2px rgb(249, 5, 221);
+    text-shadow: 0 0 2px black;
 }
 
 #box{
@@ -50,4 +49,17 @@ table{
 
 th, td{
     text-align: left;
+}
+
+#options{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2vh;
+}
+
+select{
+    font: 20px;
+    width: 12vh;
+    height: 8vh;
 }
