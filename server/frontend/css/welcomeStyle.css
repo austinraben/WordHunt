@@ -35,100 +35,100 @@ header :last-child {
     font-family: 'Pacifico', cursive;
 }
 
-    /* Content container */
-    #content {
-        max-width: 80%;
-        margin: 50px auto;
-        background: #f3efef;
-        padding: 30px;
-        border-radius: 10px;
-    }
+/* Content container */
+#content {
+    max-width: 80%;
+    margin: 50px auto;
+    background: #f3efef;
+    padding: 30px;
+    border-radius: 10px;
+}
 
-    /* Form layout */
-    form {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
+/* Form layout */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
-    /* Labels and inputs */
-    label {
-        font-weight: bold;
-        font-size: 25px;
-    }
+/* Labels and inputs */
+label {
+    font-weight: bold;
+    font-size: 25px;
+}
 
-    input,
-    select {
-        padding: 10px;
-        font-size: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        width: 100%;
-        font-family: 'Arial', sans-serif;
-    }
+input,
+select {
+    padding: 10px;
+    font-size: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    font-family: 'Arial', sans-serif;
+}
 
-    /* Username exists prompt */
-    #username-exists {
-        border: 2px solid #987554;
-        background: #f1eade;
-        padding: 15px;
-        border-radius: 8px;
-        font-size: 20px;
-        margin-top: 10px;
-    }
+/* Username exists prompt */
+#username-exists {
+    border: 2px solid #987554;
+    background: #f1eade;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 20px;
+    margin-top: 10px;
+}
 
-    #continue-btn {
-        font-size: 25px;
-        margin-right: 10px;
-    }
+#continue-btn {
+    font-size: 25px;
+    margin-right: 10px;
+}
 
-    #cancel-btn {
-        font-size: 25px;
-        margin-left: 10px;
-    }
+#cancel-btn {
+    font-size: 25px;
+    margin-left: 10px;
+}
 
-    /* Hidden class to hide elements */
-    .hidden {
-        display: none;
-    }
+/* Hidden class to hide elements */
+.hidden {
+    display: none;
+}
 
-    /* Buttons Container */
-    #buttons {
-        display: flex;
-        justify-content: space-between;
-        /* Align buttons to the left and right */
-        margin-top: 30px;
-        gap: 10px;
-    }
+/* Buttons Container */
+#buttons {
+    display: flex;
+    justify-content: space-between;
+    /* Align buttons to the left and right */
+    margin-top: 30px;
+    gap: 10px;
+}
 
-    /* Individual Buttons */
-    #buttons button {
-        padding: 20px 40px;
-        font-size: 24px;
-        font-weight: bold;
-        border: none;
-        border-radius: 5px;
-        width: 48%;
-        /* Each button takes up 48% of the container width */
-        cursor: pointer;
-        font-family: 'Arial', sans-serif;
-    }
+/* Individual Buttons */
+#buttons button {
+    padding: 20px 40px;
+    font-size: 24px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    width: 48%;
+    /* Each button takes up 48% of the container width */
+    cursor: pointer;
+    font-family: 'Arial', sans-serif;
+}
 
-    #game-btn {
-        background-color: #007acc;
-        /* Blue button for "Game" */
-        color: white;
-    }
+#game-btn {
+    background-color: #007acc;
+    /* Blue button for "Game" */
+    color: white;
+}
 
-    #leaderboard-btn {
-        background-color: #f39c12;
-        /* Orange button for "Leaderboard" */
-        color: white;
-    }
+#leaderboard-btn {
+    background-color: #f39c12;
+    /* Orange button for "Leaderboard" */
+    color: white;
+}
 
-    #game-btn:disabled,
-    #leaderboard-btn:disabled {
-        background-color: #ccc;
-        /* Grey when disabled */
-        cursor: not-allowed;
-    }
+#game-btn:disabled,
+#leaderboard-btn:disabled {
+    background-color: #ccc;
+    /* Grey when disabled */
+    cursor: not-allowed;
+}

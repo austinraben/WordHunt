@@ -4,34 +4,47 @@ WordHunt leaderboard. This displays a user and their top score.
 -->
 
 <!DOCTYPE html>
-<html lang = "en">
-    <head>
-        <meta charset ="UTF-8">
-        <title>index.html</title>
-        <link rel = "stylesheet" type = "text/css" href = "css/leaderboardStyle.css">
-    </head>
+<html lang="en">
 
-    <body>
-        <header>
-            <h1 id = leaderboard>Leaderboard</h1>
-            <div id="options">
-                <select id="date-select" onchange="getDate()">
-                    <option value="t">Today</option>
-                </select>
-                <select id="language-select" onchange="getLanguage()">
-                    <option value="e">English</option>
-                    <option value="g">German</option>
-                </select>
-            </div>
-        </header>
+<head>
+    <meta charset="UTF-8">
+    <title>Word Hunt - Leaderboard</title>
+    <link rel="stylesheet" type="text/css" href="css/leaderboardStyle.css">
+</head>
 
-        <div id = box>
-            <table>
-                <tr>
-                    <th id = user class = "userCol">Username</th>
-                    <th id = score class = "scoreCol">Score</th>
-                </tr>
-            </table>
+<body>
+    <header>
+        <div id=headerBlock>
+            <h1 id=leaderboard>Leaderboard</h1>
         </div>
-    </body>
+        <div id="options">
+            <select id="date-select" onchange="getDate()">
+                <option value="1">12/13</option>
+                <option value="2">12/14</option>
+                <option value="3">12/15</option>
+                <option value="4">12/16</option>
+                <option value="5">12/17</option>
+                <option value="6">12/18</option>
+                <option value="7">12/19</option>
+                <option value="8">12/20</option>
+
+
+            </select>
+            <select id="language-select" onchange="getLanguage()">
+                <option value="e">English</option>
+                <option value="g">German</option>
+            </select>
+        </div>
+    </header>
+
+    <div id=box>
+        <table>
+            <tr>
+                <th id=user class="userCol">Username</th>
+                <th id=score class="scoreCol">Score</th>
+            </tr>
+        </table>
+    </div>
+</body>
+
 </html>

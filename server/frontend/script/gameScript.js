@@ -173,11 +173,11 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-    // Reset for the next word
-    currentWord = ""; // Clear the current word
-    selectedLetters = []; // Reset selected letters
-    currentWordDisplay.textContent = ""; // Clear the current word display
-}
+        // Reset for the next word
+        currentWord = ""; // Clear the current word
+        selectedLetters = []; // Reset selected letters
+        currentWordDisplay.textContent = ""; // Clear the current word display
+    }
 
 
     // Find all valid words on the board
@@ -242,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Display all found valid words and their scores
         const wordListElement = document.createElement("ul");
         wordsFound.forEach((word) => {
-            const wordScore = calculateWordScore(word); 
+            const wordScore = calculateWordScore(word);
             const listItem = document.createElement("li");
             listItem.textContent = `${word} (+${wordScore} points)`;
             wordListElement.appendChild(listItem);
