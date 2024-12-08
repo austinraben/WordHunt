@@ -3,11 +3,12 @@ Description: Client-side script for the Word Hunt leaderboard.
 Displays the ranked user scores, based on the date and language selected.
 */
 
-//need to load 
+//Fills table with default values
 window.onload() = function () {
    getTable()
 }
 
+// Everytime someone changes the option the table will be regenerated
 function getTable() {
 
     const date = document.getElementById('date-select').value
@@ -34,7 +35,7 @@ function getTable() {
 
     // Fill the table of scores
     function fillTable(date, language){
-        
+
 
         
         // The number of users for that day and language
@@ -50,11 +51,11 @@ function getTable() {
                 const cell = document.createElement('td');
                 
                 if(f == 0){
-                    cell.textContent = //userNum[0];
+                    cell.textContent = //userNum[i];
                 }
 
                 if(f == 1){
-                    cell.textContent = //score[0];
+                    cell.textContent = //score[i];
                 }
 
 
