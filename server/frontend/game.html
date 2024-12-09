@@ -1,18 +1,15 @@
 <!--
 Description: The structure for the game interface for Word Hunt with the randomly
-generated 4x4 grid, the timer, and the user's score, and the result of the game
-displayed once the timer hits 0.  
+generated 4x4 grid, the timer and and the user's score
 -->
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Word Hunt - Game</title>
     <link rel="stylesheet" href="css/gameStyle.css">
 </head>
-
 <body>
     <header>
         <div id="user-info">
@@ -32,7 +29,7 @@ displayed once the timer hits 0.
 
         <div id="game-board" class="hidden">
             <div id="game-grid">
-                <!-- 4x4 grid will be dynamically generated -->
+                <!-- 4x4 grid dynamically generated -->
             </div>
             <div id="word-input">
                 <h3>Word:</h3>
@@ -44,14 +41,11 @@ displayed once the timer hits 0.
     <div id="results-screen" class="hidden">
         <div id="results-container">
             <h2>Your Results</h2>
-            <ul id="word-list">
-                <!-- List of words and scores will be dynamically added here -->
-            </ul>
+            <ul id="word-list"></ul>
             <button id="continue-button">Continue to Leaderboard</button>
         </div>
     </div>
 
     <script src="script/gameScript.js"></script>
 </body>
-
 </html>

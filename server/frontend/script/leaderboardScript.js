@@ -3,18 +3,16 @@ Description: Client-side script for the Word Hunt leaderboard.
 Displays the ranked user scores, based on the date and language selected.
 */
 
-//Fills table with default values
-window.onload() = function () {
-   getTable()
-}
+// Fills table with default values
+window.onload = function () {
+    getTable();
+};
 
-// Everytime someone changes the option the table will be regenerated
+// Every time someone changes the option, the table will be regenerated
 function getTable() {
+    const date = document.getElementById('date-select').value;
+    const language = document.getElementById('language-select').value;
 
-    const date = document.getElementById('date-select').value
-    const language = document.getElementById('language-select').value
-
-    //get current date value and langaueg value
     // Make call to the API
     const httpRequest = new XMLHttpRequest();
     if (!httpRequest) {
@@ -22,46 +20,43 @@ function getTable() {
         return false;
     }
 
-    // 
-    httpRequest.onreadystatechange = () => {
+    httpRequest.onreadystatechange = function () {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
             if (httpRequest.status === 200) {
-                fillTable(date, language);
-            } else { alert('ERROR'); }
-        }
-    };
-}
-
-
-    // Fill the table of scores
-    function fillTable(date, language){
-
-
-        
-        // The number of users for that day and language
-        //const userNum = 
-
-        // Iterate through every user and give them a row in the correct ranking order 
-        // userNum must already have the users ranked in order first to last
-        // same goes for score
-        for(i = 0; i < userNum; i++){
-            const row = document.createElement('tr');
-
-            for(let f = 0; f < 1; f++){
-                const cell = document.createElement('td');
-                
-                if(f == 0){
-                    cell.textContent = //userNum[i];
-                }
-
-                if(f == 1){
-                    cell.textContent = //score[i];
-                }
-
-
+                const responseData = JSON.parse(httpRequest.responseText); // Parse the response
+                fillTable(responseData);
+            } else {
+                alert('ERROR');
             }
         }
-        
-    }
+    };
+
+    httpRequest.open('GET', `/api/scores?date=${date}&language=${language}`);
+    httpRequest.send();
 }
 
+// Fill the table of scores
+function fillTable(data) {
+    const leaderboardTable = document.querySelector('#box table');
+    leaderboardTable.innerHTML = `
+        <tr>
+            <th id="user" class="userCol">Username</th>
+            <th id="score" class="scoreCol">Score</th>
+        </tr>
+    `; // Clear previous data and set table headers
+
+    const users = data.users; // Assume the API returns a "users" array
+    users.forEach(user => {
+        const row = document.createElement('tr');
+
+        const usernameCell = document.createElement('td');
+        usernameCell.textContent = user.name; // Assuming the user object has a "name" property
+        row.appendChild(usernameCell);
+
+        const scoreCell = document.createElement('td');
+        scoreCell.textContent = user.score; // Assuming the user object has a "score" property
+        row.appendChild(scoreCell);
+
+        leaderboardTable.appendChild(row);
+    });
+}
