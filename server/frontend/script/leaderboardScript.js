@@ -45,8 +45,10 @@ function fillTable(data) {
         </tr>
     `; // Clear previous data and set table headers
 
-    const users = data.users; // Assume the API returns a "users" array
-    users.forEach(user => {
+    // ranks the user from hgihest to lowest score
+    const usersRanked = data.users.sort(function(a, b){b.score - a.score}); // Assume the API returns a "users" array
+
+    usersRanked.forEach(user => {
         const row = document.createElement('tr');
 
         const usernameCell = document.createElement('td');
