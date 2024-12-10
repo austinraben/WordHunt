@@ -17,14 +17,14 @@ body {
 header {
     display: flex;
     justify-content: space-between;
-    width: 90%;
+    width: 75%;
     margin-top: 20px;
     background-color: #1f1688;
     color: white;
     padding: 10px;
     border-radius: 10px;
 }
-
+ 
 header h2 {
     margin: 0;
 }
@@ -75,7 +75,7 @@ header h2 {
 }
 
 .grid-cell {
-    background-color: #f1c40f; 
+    background-color: #f1c40f;
     color: white;
     font-size: 24px;
     font-weight: bold;
@@ -96,7 +96,7 @@ header h2 {
 }
 
 .grid-cell.valid {
-    background-color: green; 
+    background-color: green;
 }
 
 #game-grid {
@@ -104,4 +104,22 @@ header h2 {
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 10px;
     margin: 20px 0;
+}
+
+#home-btn {
+    position: absolute;
+    top: 2vh;
+    left: 2vh;
+    padding: 10px;
+    font-size: 3vh;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 1vh;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+}
+
+#home-btn:hover {
+    background-color: #007acc;
 }

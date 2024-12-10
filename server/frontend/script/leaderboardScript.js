@@ -8,32 +8,42 @@ window.onload = function () {
     getTable();
 };
 
+document.addEventListener("DOMContentLoaded", () => {
+    const homeBtn = document.getElementById("home-btn");
+
+    // If homepage button is clicked return to index.html
+    homeBtn.addEventListener("click", () => {
+       
+        window.location.href = `http://localhost:3000`;
+    });
+
+});
+
 // Every time someone changes the option, the table will be regenerated
-function getTable() {
+async function getTable() {
     const date = document.getElementById('date-select').value;
     const language = document.getElementById('language-select').value;
 
     // Make call to the API
-    const httpRequest = new XMLHttpRequest();
-    if (!httpRequest) {
-        alert('Error!');
-        return false;
-    }
+    const url = `/api/scores?date=${date}&language=${language}`;
 
-    httpRequest.onreadystatechange = function () {
-        if (httpRequest.readyState === XMLHttpRequest.DONE) {
-            if (httpRequest.status === 200) {
-                const responseData = JSON.parse(httpRequest.responseText); // Parse the response
-                fillTable(responseData);
-            } else {
-                alert('ERROR');
-            }
+    try {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
         }
-    };
 
-    httpRequest.open('GET', `/api/scores?date=${date}&language=${language}`);
-    httpRequest.send();
+        const responseData = await response.json();
+        fillTable(responseData);
+
+    }
+    catch (error) {
+        console.error("Error")
+    }
 }
+
+
 
 // Fill the table of scores
 function fillTable(data) {
@@ -45,8 +55,8 @@ function fillTable(data) {
         </tr>
     `; // Clear previous data and set table headers
 
-    // ranks the user from hgihest to lowest score
-    const usersRanked = data.users.sort(function(a, b){b.score - a.score}); // Assume the API returns a "users" array
+    // Ranks the user from highest to lowest score
+    const usersRanked = data.users.sort(function (a, b) { b.score - a.score }); // Assume the API returns a "users" array
 
     usersRanked.forEach(user => {
         const row = document.createElement('tr');

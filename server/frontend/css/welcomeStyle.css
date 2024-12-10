@@ -120,14 +120,23 @@ select {
     color: white;
 }
 
+#game-btn:hover{
+    background-color: white;
+    color: #007acc;
+}
+
 #leaderboard-btn {
     background-color: #f39c12;
     /* Orange button for "Leaderboard" */
     color: white;
 }
 
-#game-btn:disabled,
-#leaderboard-btn:disabled {
+#leaderboard-btn:hover {
+    background-color: white;
+    color: #f39c12;
+}
+
+#game-btn:disabled{
     background-color: #ccc;
     /* Grey when disabled */
     cursor: not-allowed;

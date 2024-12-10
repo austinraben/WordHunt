@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const continueButton = document.getElementById("continue-button");
     const currentWordDisplay = document.getElementById("current-word");
     const usernameDisplay = document.getElementById("username-display");
+    const homeBtn = document.getElementById("home-btn");
 
     // Retrieve the selected language and username from URL query parameters
     const params = new URLSearchParams(window.location.search);
@@ -33,6 +34,12 @@ document.addEventListener("DOMContentLoaded", () => {
     let dictionaries = { english: [], german: [] };
     let dictionariesLoaded = false;
 
+    // If homepage button is clicked return to index.html
+    homeBtn.addEventListener("click", () => {
+
+        window.location.href = `http://localhost:3000`;
+    });
+
     // Load dictionaries
     Promise.all([
         fetch("/English.txt").then((res) => res.text()),
@@ -43,11 +50,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 .split("\n")
                 .filter((line) => !line.startsWith("#"))
                 .map((word) => word.trim().toLowerCase());
-    
+
             dictionaries.german = germanData
                 .split("\n")
                 .map((word) => word.trim().toLowerCase());
-    
+
             dictionariesLoaded = true;
         })
         .catch((err) => console.error("Error loading dictionaries:", err));
@@ -187,5 +194,5 @@ document.addEventListener("DOMContentLoaded", () => {
     function endGame() {
         // Redirect to leaderboard when the game ends
         window.location.href = `/leaderboard?lang=${selectedLanguage}&user=${username}`;
-}
+    }
 });

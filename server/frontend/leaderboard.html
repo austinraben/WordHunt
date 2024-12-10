@@ -10,32 +10,41 @@ WordHunt leaderboard. This displays a user and their top score.
     <meta charset="UTF-8">
     <title>Word Hunt - Leaderboard</title>
     <link rel="stylesheet" type="text/css" href="css/leaderboardStyle.css">
+    <script src="script/leaderboardScript.js"></script>
 </head>
 
 <body>
+    
     <header>
         <div id=headerBlock>
             <h1 id=leaderboard>Leaderboard</h1>
         </div>
-        <div id="options">
-            <select id="date-select" onchange="getTable()">
-                <option value="1">12/13</option>
-                <option value="2">12/14</option>
-                <option value="3">12/15</option>
-                <option value="4">12/16</option>
-                <option value="5">12/17</option>
-                <option value="6">12/18</option>
-                <option value="7">12/19</option>
-                <option value="8">12/20</option>
-
-
-            </select>
-            <select id="language-select" onchange="getTable()">
-                <option value="e">English</option>
-                <option value="g">German</option>
-            </select>
-        </div>
     </header>
+
+    <button type="button" id="home-btn">Homepage</button>
+
+    <div id="options">
+
+        <select id="date-select" onchange="getTable()">
+            <option value="1">12/13</option>
+            <option value="2">12/14</option>
+            <option value="3">12/15</option>
+            <option value="4">12/16</option>
+            <option value="5">12/17</option>
+            <option value="6">12/18</option>
+            <option value="7">12/19</option>
+            <option value="8">12/20</option>
+
+
+        </select>
+
+        <select id="language-select" onchange="getTable()">
+            <option value="e">English</option>
+            <option value="g">German</option>
+        </select>
+
+    </div>
+
 
     <div id=box>
         <table>
@@ -45,6 +54,7 @@ WordHunt leaderboard. This displays a user and their top score.
             </tr>
         </table>
     </div>
+
 </body>
 
 </html>

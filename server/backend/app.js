@@ -6,7 +6,7 @@ const path = require('path');
 const app = express();
 
 // Use port 5000
-const port = 5000;
+const port = 3000;
 
 // MongoDB connection
 mongoose.connect('mongodb://localhost:27017/wordhunt')

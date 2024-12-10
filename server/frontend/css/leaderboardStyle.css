@@ -16,7 +16,7 @@ body {
 
 /* Page Title */
 #leaderboard {
-    margin-top: 20px;
+    margin-top: 10px;
     text-align: center;
     font-size: 7vh;
     color: #ffffff;
@@ -29,11 +29,9 @@ body {
     width: 100%;
     padding: 10px;
     margin-top: 10px;
-    ;
+    
     margin-bottom: 10px;
     vertical-align: middle;
-
-
 }
 
 #box {
@@ -71,4 +69,27 @@ td {
     justify-content: center;
     align-items: center;
     gap: 2vh;
+    margin-top: 10px;;
+}
+
+#date-select, #language-select{
+    font-size: 2.5vh;
+}
+
+#home-btn{
+    position: absolute;
+    top: 2vh;
+    left: 2vh;
+    padding: 10px;
+    font-size: 3vh;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 1vh;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+}
+
+#home-btn:hover{
+    background-color: #007acc;
 }
