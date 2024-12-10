@@ -85,7 +85,7 @@ const generateDailyGrid = () => {
     for (let i = 0; i < 4; i++) {
         const row = [];
         for (let j = 0; j < 4; j++) {
-            const isVowel = Math.random() < 0.4; // ~40% chance for vowels
+            const isVowel = Math.random() < 0.4; // ~60% chance for vowels
             const letterPool = isVowel ? vowels : consonants;
             const letter = letterPool.charAt(Math.floor(Math.random() * letterPool.length));
             row.push(letter);
