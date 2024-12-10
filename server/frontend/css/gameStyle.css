@@ -102,7 +102,7 @@ header h2 {
 #game-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 10px;
+    grid-gap: 25px;
     margin: 20px 0;
 }
 
@@ -122,4 +122,9 @@ header h2 {
 
 #home-btn:hover {
     background-color: #007acc;
+}
+
+#current-word {
+    font-size: 24px;
+    font-weight: bold;
 }
