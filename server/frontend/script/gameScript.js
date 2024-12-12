@@ -184,6 +184,10 @@ document.addEventListener("DOMContentLoaded", () => {
         readyButton.parentElement.classList.add("hidden");
         readyButton.classList.add("hidden");
 
+        const hideExplanation = document.getElementById("explanation");
+
+        hideExplanation.style.display = "none";
+
         gameBoard.classList.remove("hidden");
 
         fetchGrid();

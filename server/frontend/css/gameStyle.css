@@ -104,6 +104,8 @@ header h2 {
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 10px;
     margin: 20px 0;
+    border: 5px solid #1f1688;
+    border-radius: 5px;
 }
 
 #home-btn {
@@ -122,4 +124,14 @@ header h2 {
 
 #home-btn:hover {
     background-color: #007acc;
+}
+
+/* Game instructions */
+#explanation {
+    margin-top: 40px;
+    padding: 10px;
+    text-align: center;
+    font-size:large;
+    border: 5px solid #005f99;
+    border-radius: 5px;
 }
