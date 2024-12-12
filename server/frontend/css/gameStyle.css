@@ -102,7 +102,7 @@ header h2 {
 #game-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 10px;
+    grid-gap: 25px;
     margin: 20px 0;
     border: 5px solid #1f1688;
     border-radius: 5px;
@@ -134,4 +134,9 @@ header h2 {
     font-size:large;
     border: 5px solid #005f99;
     border-radius: 5px;
+}
+
+#current-word {
+    font-size: 24px;
+    font-weight: bold;
 }
