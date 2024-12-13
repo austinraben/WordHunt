@@ -174,7 +174,7 @@ app.post('/generate-daily-grid', async (req, res) => {
     try {
         const today = new Date().getDate();
         const language = req.body.language;
-        const grid = generateDailyGrid();
+        const grid = generateDailyGrid(language);
 
         // Save the grid in the database
         const newGrid = new WordGrid({
@@ -192,11 +192,12 @@ app.post('/generate-daily-grid', async (req, res) => {
 
 // Backend algorithm to generate a juiced 4x4 grid
 // Letter selection is pseudorandom and has bias to create fun grids :)
-const generateDailyGrid = () => {
+const generateDailyGrid = (language) => {
     const grid = [];
 
-    // Letter pools to be picked from
-    const vowels = "EEAIOU";
+    // Letter pools based on language
+    const normalizedLanguage = language ? language.trim().toLowerCase() : "english";
+    const vowels = normalizedLanguage === "german" ? "EEAIOUÄÖÜ" : "EEAIOU"; 
     const commonConsonants = "RDNSTL";
     const lessCommonConsonants = "BCFGHMPWY";
     const rareConsonants = "KJXQZV";
