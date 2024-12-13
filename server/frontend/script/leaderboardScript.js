@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (languageSelect) {
         languageSelect.addEventListener("change", () => {
             console.log("Selected language:", languageSelect.value);
-            updateLeaderboard(); 
+            updateLeaderboard();
         });
     } else {
         console.error("Language dropdown (language-select) not found in the DOM.");
@@ -80,7 +80,7 @@ function fillTable(data) {
             row.appendChild(scoreCell);
 
             const wordsCell = document.createElement("td");
-            wordsCell.textContent = user.totalWords || 0; 
+            wordsCell.textContent = user.totalWords || 0;
             row.appendChild(wordsCell);
 
             const longestWordCell = document.createElement("td");
@@ -107,8 +107,8 @@ async function updateLeaderboard() {
     const languageSelect = document.getElementById("language-select");
 
     // Default: today's date and English
-    const date = dateSelect.value || new Date().getDate(); 
-    const language = languageSelect.value || "English"; 
+    const date = dateSelect.value || new Date().getDate();
+    const language = languageSelect.value || "English";
     const url = `/api/scores?date=${date}&language=${language}`;
 
     console.log(`Requesting leaderboard for date: ${date}, language: ${language}`);

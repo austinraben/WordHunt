@@ -13,34 +13,34 @@ generated 4x4 grid, the timer and and the user's score
 </head>
 
 <body>
-    
+
     <header>
         <div id="header-container">
-            <div id="timer">
-                <h2>Time Left: <span id="time-remaining">100</span>s</h2>
+            <div id="buttons-container">
+                <button id="home-btn">Homepage</button>
+                <button id="skip-btn" class="hidden">Skip to End</button>
             </div>
             <div id="user-info">
                 <h2 id="username-display">Player: <span>Guest</span></h2>
                 <h2 id="word-count-display">Words: <span>0</span></h2>
                 <h2 id="score-display">Score: <span>0</span></h2>
             </div>
-            <div id="buttons-container">
-                <button id="home-btn">Homepage</button>
-                <button id="skip-btn" class="hidden">Skip to End</button>
+            <div id="timer">
+                <h2>Time Left: <span id="time-remaining">100</span>s</h2>
             </div>
         </div>
-    </header>    
+    </header>
 
     <div id="warning-alert">
-        <div id = "warning">Warning</div>
+        <div id="warning">Warning</div>
         <div>If you leave now, your score won't be saved.</div>
         <div>
-            <label for = "continueBtn">I'm just kidding let me play!</label>
-            <button  id="continueBtn">Continue</button>
+            <label for="continueBtn">I'm just kidding let me play!</label>
+            <button id="continueBtn">Continue</button>
         </div>
         <div>
-            <label for = "exitBtn">I don't care!</label>
-            <button  id="exitBtn">Exit</button>
+            <label for="exitBtn">I don't care!</label>
+            <button id="exitBtn">Exit</button>
         </div>
     </div>
 
@@ -50,9 +50,10 @@ generated 4x4 grid, the timer and and the user's score
         </div>
 
         <div id="explanation">
-            <div>Try to connect the characters to a word.</div>
-            <div>You can only connect letters bordering each other.</div>
-            <div>If you get a word right it will show it in green.</div>
+            <div>Connect the letters to form a word.</div>
+            <div>To build a word, click on a letter</div>
+            <div>then drag your mouse over bordering letters.</div>
+            <div>If the word turns green then it is valid.</div>
             <div>Have fun!</div>
         </div>
 
@@ -69,4 +70,5 @@ generated 4x4 grid, the timer and and the user's score
 
     <script src="script/gameScript.js"></script>
 </body>
+
 </html>

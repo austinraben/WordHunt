@@ -21,10 +21,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Global variables
     let score = 0;
-    let currentWord = "";       
-    let selectedLetters = [];  
-    let wordsFound = [];     
-    let dictionaries = { english: [], german: [] }; 
+    let currentWord = "";
+    let selectedLetters = [];
+    let wordsFound = [];
+    let dictionaries = { english: [], german: [] };
     let gridId = null;
     let params = new URLSearchParams(window.location.search);
     let selectedLanguage = params.get("lang");
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch((err) => console.error("Error loading dictionaries:", err));
 
     // Function to fetch daily grid data from backend
-    function fetchGrid() {    
+    function fetchGrid() {
         fetch(`/get-daily-grid?lang=${selectedLanguage}`)
             .then((response) => response.json())
             .then((data) => {
@@ -62,12 +62,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             })
             .catch((err) => console.error("Error fetching grid:", err));
-    }   
+    }
 
     // Function to generate the daily grid in the DOM
     function generateGrid(gridData) {
         const grid = document.getElementById("game-grid");
-        grid.innerHTML = ""; 
+        grid.innerHTML = "";
 
         gridData.forEach((row, rowIndex) => {
             row.forEach((letter, colIndex) => {
@@ -100,8 +100,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     warning.classList.add("hidden");
-     // If homepage button is clicked give warning before return to index.html 
-     if (homeBtn) {
+    // If homepage button is clicked give warning before return to index.html 
+    if (homeBtn) {
         homeBtn.addEventListener("click", () => {
             if (readyClicked) {
                 if (!warningDisplay) {
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 window.location.href = `http://localhost:3000`;
             }
         });
-    }    
+    }
 
     // If exit button is clicked, return to index.html
     if (exitBtn) {
@@ -132,15 +132,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // Event listener for 'Skip to End' button
     if (skipButton) {
         skipButton.addEventListener("click", () => {
-            timer = 0; 
-            clearInterval(timerInterval); 
-            endGame(); 
-        });    
+            timer = 0;
+            clearInterval(timerInterval);
+            endGame();
+        });
     }
 
     // Start the countdown timer: 100 seconds
     let timer = 100;
-    let timerInterval = null;   
+    let timerInterval = null;
     function startTimer() {
         timerInterval = setInterval(() => {
             timer--;
@@ -194,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
             !wordsFound.includes(currentWord.toLowerCase());
 
         selectedLetters.forEach((letter) => {
-            letter.classList.remove("valid", "invalid", "formingWord"); 
+            letter.classList.remove("valid", "invalid", "formingWord");
             if (isValidWord) {
                 letter.classList.add("valid");
             }
@@ -242,27 +242,27 @@ document.addEventListener("DOMContentLoaded", () => {
     function endGame() {
         // Find the user's longest word found
         const longestWord = wordsFound.reduce((a, b) => (a.length > b.length ? a : b), '');
-        const totalWords = wordsFound.length; 
-    
+        const totalWords = wordsFound.length;
+
         fetch("/save-score", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 username: username,
                 score: score,
-                gridId: gridId, 
+                gridId: gridId,
                 language: selectedLanguage,
-                longestWord: longestWord, 
-                totalWords: totalWords    
+                longestWord: longestWord,
+                totalWords: totalWords
             }),
         })
             .then((response) => response.text())
             .then((data) => {
                 console.log("Score saved successfully:", data);
-                
+
                 // Redirect to the leaderboard
                 window.location.href = `/leaderboard?lang=${selectedLanguage}&user=${username}`;
             })
             .catch((err) => console.error("Error saving score:", err));
-    }    
+    }
 });

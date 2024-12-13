@@ -20,13 +20,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Enable game button upon username input
     usernameInput.addEventListener("input", () => {
-        const username = usernameInput.value.trim().toLowerCase() 
-        gameBtn.disabled = username === "";        
+        const username = usernameInput.value.trim().toLowerCase()
+        gameBtn.disabled = username === "";
     });
 
     // Event listener for "Game" button
     document.getElementById("welcome-form").addEventListener("submit", async (event) => {
-        event.preventDefault(); 
+        event.preventDefault();
         const username = usernameInput.value.trim().toLowerCase();
         const today = new Date().getDate();
 
@@ -35,9 +35,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const response = await fetch("/create-user", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ username, date:today }),
+                body: JSON.stringify({ username, date: today }),
             });
-    
+
             // If conflict response, show "username-exists" prompt
             if (response.status === 409) {
                 usernameExistsDiv.classList.remove("hidden");
@@ -49,25 +49,25 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (err) {
             console.error("Error checking username:", err);
         }
-    });    
+    });
 
     // Event listener for the "Yes" button (when username exists)
     continueBtn.addEventListener("click", () => {
-        usernameExistsDiv.classList.add("hidden"); 
+        usernameExistsDiv.classList.add("hidden");
         navigateTo("game");
     });
 
     // Event listener for the "No" button (when username exists)
     cancelBtn.addEventListener("click", () => {
-        usernameInput.value = ""; 
-        gameBtn.disabled = true;   
-        usernameExistsDiv.classList.add("hidden");  
+        usernameInput.value = "";
+        gameBtn.disabled = true;
+        usernameExistsDiv.classList.add("hidden");
     });
 
     // Function to navigate to the appropriate page (game or leaderboard)
     function navigateTo(mode) {
         const language = document.getElementById("language-select").value;
-        const username = usernameInput.value.trim().toLowerCase(); 
+        const username = usernameInput.value.trim().toLowerCase();
 
         window.location.href = `http://localhost:3000/${mode}?lang=${language}&user=${username}`;
     }

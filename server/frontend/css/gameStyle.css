@@ -23,7 +23,7 @@ header {
     padding: 10px;
     border-radius: 10px;
 }
- 
+
 header h2 {
     margin: 0;
 }
@@ -41,38 +41,43 @@ header h2 {
 }
 
 #timer {
-    flex: 1; 
-    text-align: left; 
-    font-size: 20px;
+    flex: 1;
+    text-align: right;
+    font-size: 2.5vh;
     font-weight: bold;
 }
 
 #user-info {
-    flex: 1; 
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 5px;
-    text-align: center;
+    text-align: left;
+    margin-left: 6%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 30%;
 }
 
 #buttons-container {
-    flex: 1; 
+    flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: flex-end; 
-    justify-content: center;
-    text-align: right;
-    gap: 10px; 
+    align-items: flex-start;
+    justify-content: left;
+
 }
 
 #home-btn {
     padding: 10px 20px;
-    font-size: 1em;
+    font-size: 2vh;
     background-color: #f39c12;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    text-align: left;
+    margin-bottom: 10px;
 }
 
 #home-btn:hover {
@@ -82,7 +87,7 @@ header h2 {
 
 #skip-btn {
     padding: 10px 20px;
-    font-size: 1em;
+    font-size: 2vh;
     background-color: #007acc;
     color: white;
     border: none;
@@ -182,7 +187,7 @@ header h2 {
     margin-top: 40px;
     padding: 10px;
     text-align: center;
-    font-size:large;
+    font-size: large;
     border: 5px solid #005f99;
     border-radius: 5px;
 }
@@ -192,16 +197,16 @@ header h2 {
     font-weight: bold;
 }
 
-#warning{
+#warning {
     text-align: center;
 }
 
-#warning-alert{
+#warning-alert {
     position: absolute;
-    margin-top: 37vh;
     padding: 2vh;
     text-align: center;
-    font-size:large;
+    font-size: large;
+    margin-top: 34vh;
     border-radius: 2vh;
     background-color: brown;
     color: #eaf7ff;
@@ -211,12 +216,15 @@ header h2 {
     font-size: 7vh;
 }
 
-label, #exitBtn, #continueBtn{
+label,
+#exitBtn,
+#continueBtn {
     font-size: 3vh;
     display: inline-block;
 }
 
-#exitBtn, #continueBtn{
+#exitBtn,
+#continueBtn {
     background-color: #f39c12;
     color: white;
     border: none;
@@ -227,6 +235,7 @@ label, #exitBtn, #continueBtn{
     cursor: pointer;
 }
 
-#exitBtn:hover, #continueBtn:hover {
+#exitBtn:hover,
+#continueBtn:hover {
     background-color: #005f99;
 }

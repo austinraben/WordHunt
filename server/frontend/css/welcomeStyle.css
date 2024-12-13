@@ -120,7 +120,7 @@ select {
     color: white;
 }
 
-#game-btn:hover{
+#game-btn:hover {
     background-color: white;
     color: #007acc;
 }
@@ -136,7 +136,7 @@ select {
     color: #f39c12;
 }
 
-#game-btn:disabled{
+#game-btn:disabled {
     background-color: #ccc;
     /* Grey when disabled */
     cursor: not-allowed;

@@ -54,10 +54,10 @@ app.get('/get-user/:username', async (req, res) => {
 // GET to find daily grid information in 'WordGrid' schema
 app.get('/get-daily-grid', async (req, res) => {
     try {
-        const { lang } = req.query; 
-        const today = new Date().getDate(); 
+        const { lang } = req.query;
+        const today = new Date().getDate();
 
-        const grid = await WordGrid.findOne({ day: today, language: lang }); 
+        const grid = await WordGrid.findOne({ day: today, language: lang });
 
         if (grid) {
             res.status(200).json({ grid: grid.grid, gridId: grid._id });
@@ -88,7 +88,7 @@ app.get('/api/scores', async (req, res) => {
         const wordGrid = await WordGrid.findOne({ day: parseInt(date), language });
         if (!wordGrid) {
             console.log('No WordGrid found for date and language:', { date, language });
-            return res.status(200).json({ users: [] }); 
+            return res.status(200).json({ users: [] });
         }
 
         const scores = await Score.find({ gridId: wordGrid._id });
@@ -118,7 +118,7 @@ app.get('/api/scores', async (req, res) => {
             // Arrange leaderboard entries in descending order by highest score
             .sort((a, b) => b.score - a.score);
 
-        res.status(200).json({ users: sortedScores }); 
+        res.status(200).json({ users: sortedScores });
     } catch (error) {
         console.error('Error fetching scores:', error.message);
         res.status(500).json({ message: 'Error fetching scores: ' + error.message });  // 500: Internal Server Error
@@ -131,16 +131,16 @@ app.get('/api/scores', async (req, res) => {
 //   - 400 Bad Request: For any other errors
 app.post('/create-user', async (req, res) => {
     try {
-        const username = req.body.username.toLowerCase(); 
+        const username = req.body.username.toLowerCase();
         const existingUser = await User.findOne({ username });
 
         if (existingUser) {
-            return res.status(409).json({ message: 'Username already exists.' });  
+            return res.status(409).json({ message: 'Username already exists.' });
         }
 
         const user = new User({ username });
         await user.save();
-        res.status(201).send('User created successfully'); 
+        res.status(201).send('User created successfully');
     } catch (err) {
         res.status(400).send('Error creating user: ' + err.message);
     }
@@ -155,8 +155,8 @@ app.post('/save-score', async (req, res) => {
             username,
             score,
             gridId,
-            longestWord,  
-            totalWords    
+            longestWord,
+            totalWords
         });
 
         await scoreData.save();
@@ -241,7 +241,7 @@ const generateDailyGrid = () => {
                         [i - 1, j], [i + 1, j],         // Vertical neighbors
                         [i, j - 1], [i, j + 1],         // Horizontal neighbors
                         [i - 1, j - 1], [i - 1, j + 1], // Diagonal neighbors
-                        [i + 1, j - 1], [i + 1, j + 1]  
+                        [i + 1, j - 1], [i + 1, j + 1]
                     ];
 
                     neighbors.forEach(([ni, nj]) => {
