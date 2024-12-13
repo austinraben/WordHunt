@@ -140,3 +140,37 @@ header h2 {
     font-size: 24px;
     font-weight: bold;
 }
+
+#warning{
+    text-align: center;
+}
+
+#warning-alert{
+    position: absolute;
+    margin-top: 20vh;
+    padding: 2vh;
+    text-align: center;
+    font-size:large;
+    border-radius: 2vh;
+    background-color: brown;
+    color: #eaf7ff;
+    font-family: 'Arial', sans-serif;
+    width: 50%;
+    height: 40%;
+    font-size: 7vh;
+}
+
+label, #exit, #continue{
+    font-size: 3vh;
+    display: inline-block;
+}
+
+#exit, #continue{
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 1vh;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    padding: 1vh;
+}

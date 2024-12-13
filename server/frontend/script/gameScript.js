@@ -17,6 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentWordDisplay = document.getElementById("current-word");
     const usernameDisplay = document.getElementById("username-display");
     const homeBtn = document.getElementById("home-btn");
+    const warning = document.getElementById("warning-alert");
+    const continueBtn = document.getElementById("continue");
+    const exitBtn = document.getElementById("exit");
 
     // Retrieve the selected language and username from URL query parameters
     const params = new URLSearchParams(window.location.search);
@@ -33,12 +36,37 @@ document.addEventListener("DOMContentLoaded", () => {
     let validWords = new Set(); // Use a set to avoid duplicates
     let dictionaries = { english: [], german: [] };
     let dictionariesLoaded = false;
+    let warningDisplay = false;
+    let readyClicked = false;
 
-    // If homepage button is clicked return to index.html
+    warning.style.display = "none";
+
+    // If homepage button is clicked give warning before return to index.html 
     homeBtn.addEventListener("click", () => {
-
-        window.location.href = `http://localhost:3000`;
+        if (!warningDisplay && readyClicked) {
+            warning.style.display = "block";
+            warningDisplay = true;
+        }
+        else if(!warningDisplay){
+            window.location.href = `http://localhost:3000`;
+        }
+      
     });
+
+    exitBtn.addEventListener("click", () => {
+        
+        window.location.href = `http://localhost:3000`;
+        
+    });
+
+    continueBtn.addEventListener("click", () => {
+        
+        warning.style.display = "none";
+        warningDisplay = false;
+        
+    });
+
+
 
     // Load dictionaries
     Promise.all([
@@ -184,6 +212,8 @@ document.addEventListener("DOMContentLoaded", () => {
         readyButton.parentElement.classList.add("hidden");
         readyButton.classList.add("hidden");
 
+        readyClicked = true;
+
         const hideExplanation = document.getElementById("explanation");
 
         hideExplanation.style.display = "none";
@@ -193,6 +223,8 @@ document.addEventListener("DOMContentLoaded", () => {
         fetchGrid();
         startTimer();
     });
+
+
 
     // End the game
     function endGame() {

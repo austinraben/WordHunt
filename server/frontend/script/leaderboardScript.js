@@ -52,12 +52,13 @@ function fillTable(data) {
         <tr>
             <th id="user" class="userCol">Username</th>
             <th id="score" class="scoreCol">Score</th>
+            <th id="words" class="wordsCol">Word Count</th>
         </tr>
     `; // Clear previous data and set table headers
 
     // Ranks the user from highest to lowest score
     const usersRanked = data.users.sort(function (a, b) { b.score - a.score }); // Assume the API returns a "users" array
-
+    
     usersRanked.forEach(user => {
         const row = document.createElement('tr');
 
@@ -68,6 +69,10 @@ function fillTable(data) {
         const scoreCell = document.createElement('td');
         scoreCell.textContent = user.score; // Assuming the user object has a "score" property
         row.appendChild(scoreCell);
+
+        const wordCell = document.createElement('td');
+        wordCell.textContent = user.totalWords; // Assuming the user object has a "totalWords" property
+        row.appendChild(wordCell);
 
         leaderboardTable.appendChild(row);
     });
