@@ -1,8 +1,8 @@
 /*
-Description: Styling for the game page of Word Hunt
+gameStyle.css
+StyleSheet for game.html
 */
 
-/* General body styling */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -13,7 +13,6 @@ body {
     align-items: center;
 }
 
-/* Header styling */
 header {
     display: flex;
     justify-content: space-between;
@@ -29,18 +28,70 @@ header h2 {
     margin: 0;
 }
 
-/* Timer styling */
+/* Position the header container */
+#header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #1f1688;
+    color: white;
+    width: 75%;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
 #timer {
+    flex: 1; 
+    text-align: left; 
     font-size: 20px;
     font-weight: bold;
 }
 
-/* Game container */
-#game-container {
+#user-info {
+    flex: 1; /* Take up equal space */
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: 20px 0;
+    gap: 5px;
+    text-align: center; /* Ensure text is left-aligned */
+}
+
+/* Buttons container: center-aligned */
+#buttons-container {
+    flex: 1; /* Take up equal space */
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: flex-end; /* Center buttons horizontally */
+    gap: 10px; /* Add space between buttons */
+}
+
+#home-btn {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#home-btn:hover {
+    background-color: #007acc;
+    cursor: pointer;
+}
+
+#skip-btn {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#skip-btn:hover {
+    background-color: #007acc;
 }
 
 /* Ready container */
@@ -61,17 +112,35 @@ header h2 {
     cursor: pointer;
 }
 
-#ready-button:hover {
+#ready-button:hover,
+#home-btn:hover,
+#skip-btn:hover {
     background-color: #005f99;
 }
 
-/* Game board */
+#game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
 #game-board.hidden {
     display: none;
 }
 
 .hidden {
     display: none;
+}
+
+#game-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 25px;
+    margin: 20px 0;
+    border: 5px solid #1f1688;
+    border-radius: 5px;
+    padding: 15px;
 }
 
 .grid-cell {
@@ -91,7 +160,8 @@ header h2 {
     user-select: none;
 }
 
-.grid-cell:hover {
+.grid-cell:hover,
+.grid-cell.formingWord {
     background-color: #e67e22;
 }
 
@@ -99,34 +169,15 @@ header h2 {
     background-color: green;
 }
 
-#game-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 25px;
-    margin: 20px 0;
-    border: 5px solid #1f1688;
-    border-radius: 5px;
+.grid-cell.invalid {
+    background-color: grey;
 }
 
-#home-btn {
-    position: absolute;
-    top: 2vh;
-    left: 2vh;
-    padding: 10px;
-    font-size: 3vh;
-    background-color: #f39c12;
-    color: white;
-    border: none;
-    border-radius: 1vh;
-    font-family: 'Arial', sans-serif;
+#current-word {
+    font-size: 24px;
     font-weight: bold;
 }
 
-#home-btn:hover {
-    background-color: #007acc;
-}
-
-/* Game instructions */
 #explanation {
     margin-top: 40px;
     padding: 10px;
@@ -134,9 +185,4 @@ header h2 {
     font-size:large;
     border: 5px solid #005f99;
     border-radius: 5px;
-}
-
-#current-word {
-    font-size: 24px;
-    font-weight: bold;
 }

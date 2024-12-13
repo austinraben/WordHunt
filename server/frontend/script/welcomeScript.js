@@ -1,8 +1,7 @@
 /*
-Author: Austin Raben
-Description: Script for the welcome page of Word Hunt. 
-It handles working username input, existing user prompts, language selection, and 
-navigation to the game or leaderboard pages.
+welcomeScript.js
+Client-side JavaScript for index.html (welcome page)
+
 */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -14,56 +13,62 @@ document.addEventListener("DOMContentLoaded", () => {
     const continueBtn = document.getElementById("continue-btn");
     const cancelBtn = document.getElementById("cancel-btn");
 
-    // Pretend database of existing usernames (replace this with real database later)
-    const mockDatabase = ["Austin", "Maya", "Tim"];
-
-    // Enable game and leaderboard buttons once username is filled
-    usernameInput.addEventListener("input", () => {
-        const username = usernameInput.value.trim().toLowerCase()  // Remove spaces from start/end of the input
-
-        gameBtn.disabled = username === "";        // Disable if input is empty
-        
-    });
-
-    // Event listener for form submission (pressing Enter or clicking "Game" button)
-    document.getElementById("welcome-form").addEventListener("submit", (event) => {
-        event.preventDefault();  // Stop the form from refreshing the page
-        const username = usernameInput.value.trim().toLowerCase()  // Get the entered username, convert to lowercase
-
-        // Check if the username exists in the mock database (case-insensitive)
-        if (mockDatabase.some((storedUser) => storedUser.toLowerCase() === username)) {
-            usernameExistsDiv.classList.remove("hidden");  // Make the div visible
-        } else {
-            // If the username doesn't exist, go straight to the game
-            navigateTo("game");
-        }
-    });
-
     // Event listener for the "Leaderboard" button
     leaderboardBtn.addEventListener("click", () => {
-       
         navigateTo("leaderboard");
     });
 
+    // Enable game button upon username input
+    usernameInput.addEventListener("input", () => {
+        const username = usernameInput.value.trim().toLowerCase() 
+        gameBtn.disabled = username === "";        
+    });
+
+    // Event listener for "Game" button
+    document.getElementById("welcome-form").addEventListener("submit", async (event) => {
+        event.preventDefault(); 
+        const username = usernameInput.value.trim().toLowerCase();
+        const today = new Date().getDate();
+
+        // Fetch username to check if they already played today
+        try {
+            const response = await fetch("/create-user", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, date:today }),
+            });
+    
+            // If conflict response, show "username-exists" prompt
+            if (response.status === 409) {
+                usernameExistsDiv.classList.remove("hidden");
+            } else if (response.ok) {
+                navigateTo("game");
+            } else {
+                console.error("Unexpected response status:", response.status);
+            }
+        } catch (err) {
+            console.error("Error checking username:", err);
+        }
+    });    
+
     // Event listener for the "Yes" button (when username exists)
     continueBtn.addEventListener("click", () => {
-        usernameExistsDiv.classList.add("hidden");  // Hide the "username exists" message
+        usernameExistsDiv.classList.add("hidden"); 
         navigateTo("game");
     });
 
     // Event listener for the "No" button (when username exists)
     cancelBtn.addEventListener("click", () => {
-        usernameInput.value = "";  // Clear username input field
-        gameBtn.disabled = true;   // Disable the "Game" button
-        usernameExistsDiv.classList.add("hidden");  // Hide the "username exists" message
+        usernameInput.value = ""; 
+        gameBtn.disabled = true;   
+        usernameExistsDiv.classList.add("hidden");  
     });
 
     // Function to navigate to the appropriate page (game or leaderboard)
     function navigateTo(mode) {
-        const language = document.getElementById("language-select").value;  // Get the selected language
-        const username = usernameInput.value.trim();  // Get the selected username
+        const language = document.getElementById("language-select").value;
+        const username = usernameInput.value.trim().toLowerCase(); 
 
-        // Redirect the user to the appropriate path with parameters in the URL
         window.location.href = `http://localhost:3000/${mode}?lang=${language}&user=${username}`;
     }
 });

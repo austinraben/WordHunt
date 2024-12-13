@@ -1,31 +1,65 @@
 /*
-Description: Client-side script for the Word Hunt leaderboard. 
-Displays the ranked user scores, based on the date and language selected.
+leaderboardScript.js
+Client-side JavaScript for leaderboard.html (the Word Hunt global leaderboard)
 */
 
-// Fills table with default values
-window.onload = function () {
-    getTable();
-};
-
 document.addEventListener("DOMContentLoaded", () => {
+    // DOM Elements
+    const dateSelect = document.getElementById("date-select");
+    const languageSelect = document.getElementById("language-select");
     const homeBtn = document.getElementById("home-btn");
 
-    // If homepage button is clicked return to index.html
-    homeBtn.addEventListener("click", () => {
-       
-        window.location.href = `http://localhost:3000`;
+    // Populate the date dropdown with the last 7 days
+    if (dateSelect) {
+        const today = new Date();
+        for (let i = 0; i < 7; i++) {
+            const date = new Date(today);
+            date.setDate(today.getDate() - i);
+
+            const option = document.createElement("option");
+            option.value = date.getDate();
+            option.textContent = `${date.getMonth() + 1}/${date.getDate()}`; // Display as MM/DD
+            dateSelect.appendChild(option);
+        }
+
+        dateSelect.value = today.getDate(); // Set today's date as default dropdown
+
+        } else {
+            console.error("Date dropdown (date-select) not found in the DOM");
+        }
+
+    // Event listener for date changes
+    dateSelect.addEventListener("change", () => {
+        updateLeaderboard();
     });
 
+    // Event listener for language changes
+    if (languageSelect) {
+        languageSelect.addEventListener("change", () => {
+            console.log("Selected language:", languageSelect.value);
+            updateLeaderboard(); 
+        });
+    } else {
+        console.error("Language dropdown (language-select) not found in the DOM.");
+    }
+
+    // Event listener for home button
+    if (homeBtn) {
+        homeBtn.addEventListener("click", () => {
+            window.location.href = `http://localhost:3000`;
+        });
+    }
+
+    // Fetch the leaderboard for the default date and language
+    updateLeaderboard();
 });
 
-// Every time someone changes the option, the table will be regenerated
-async function getTable() {
-    const date = document.getElementById('date-select').value;
-    const language = document.getElementById('language-select').value;
+// Fetch leaderboard data based on selected date and language
+async function updateLeaderboard() {
+    const date = document.getElementById("date-select").value; 
+    const language = document.getElementById("language-select").value; 
 
-    // Make call to the API
-    const url = `/api/scores?date=${date}&language=${language}`;
+    const url = `/api/scores?date=${date}&language=${language}`; 
 
     try {
         const response = await fetch(url);
@@ -35,39 +69,45 @@ async function getTable() {
         }
 
         const responseData = await response.json();
+        console.log("Leaderboard data fetched:", responseData); 
         fillTable(responseData);
 
-    }
-    catch (error) {
-        console.error("Error")
+    } catch (error) {
+        console.error("Error fetching leaderboard data:", error.message);
     }
 }
 
-
-
-// Fill the table of scores
+// Fill the table with username and pre-sorted score information
 function fillTable(data) {
-    const leaderboardTable = document.querySelector('#box table');
+    const leaderboardTable = document.getElementById("leaderboard-container").getElementsByTagName("table")[0];
     leaderboardTable.innerHTML = `
         <tr>
             <th id="user" class="userCol">Username</th>
             <th id="score" class="scoreCol">Score</th>
+            <th id="words" class="wordsCol">Total Words</th>
+            <th id="longest-word" class="longestWordCol">Longest Word</th>
         </tr>
-    `; // Clear previous data and set table headers
+    `;  // Clear previous data and set table headers
 
-    // Ranks the user from highest to lowest score
-    const usersRanked = data.users.sort(function (a, b) { b.score - a.score }); // Assume the API returns a "users" array
+    // Fill each column with the appropriate data
+    data.users.forEach((user) => {
+        const row = document.createElement("tr");
 
-    usersRanked.forEach(user => {
-        const row = document.createElement('tr');
-
-        const usernameCell = document.createElement('td');
-        usernameCell.textContent = user.name; // Assuming the user object has a "name" property
+        const usernameCell = document.createElement("td");
+        usernameCell.textContent = user.name;
         row.appendChild(usernameCell);
 
-        const scoreCell = document.createElement('td');
-        scoreCell.textContent = user.score; // Assuming the user object has a "score" property
+        const scoreCell = document.createElement("td");
+        scoreCell.textContent = user.score;
         row.appendChild(scoreCell);
+
+        const wordsCell = document.createElement("td");
+        wordsCell.textContent = user.totalWords; 
+        row.appendChild(wordsCell);
+
+        const longestWordCell = document.createElement("td");
+        longestWordCell.textContent = user.longestWord || "N/A";
+        row.appendChild(longestWordCell);
 
         leaderboardTable.appendChild(row);
     });
