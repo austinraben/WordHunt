@@ -51,6 +51,7 @@ body {
 
 table {
     color: white;
+    background-color: #005f99;
     text-shadow: 0 0 2px rgb(0, 0, 0);
     margin-top: 3vh;
     width: 100%;
@@ -64,7 +65,8 @@ table {
 
 #user,
 #score,
-#words {
+#words,
+#longestWord {
     text-align: center;
 }
 
