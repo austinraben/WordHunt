@@ -1,3 +1,8 @@
+/*
+user.js -- MongoDB Schema
+Stores usernames
+*/
+
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
