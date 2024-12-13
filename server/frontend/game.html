@@ -15,28 +15,32 @@ generated 4x4 grid, the timer and and the user's score
 <body>
     
     <header>
-        <div id="user-info">
-            <h2 id="username-display">Player: <span>Guest</span></h2>
-            <h2 id="word-count-display">Words: <span>0</span></h2>
-            <h2 id="score-display">Score: <span>0</span></h2>
+        <div id="header-container">
+            <div id="timer">
+                <h2>Time Left: <span id="time-remaining">100</span>s</h2>
+            </div>
+            <div id="user-info">
+                <h2 id="username-display">Player: <span>Guest</span></h2>
+                <h2 id="word-count-display">Words: <span>0</span></h2>
+                <h2 id="score-display">Score: <span>0</span></h2>
+            </div>
+            <div id="buttons-container">
+                <button id="home-btn">Homepage</button>
+                <button id="skip-btn" class="hidden">Skip to End</button>
+            </div>
         </div>
-        <div id="timer">
-            <h2>Time Left: <span id="time-remaining">100</span>s</h2>
-        </div>
-    </header>
-
-    <button  id="home-btn">Homepage</button>
+    </header>    
 
     <div id="warning-alert">
         <div id = "warning">Warning</div>
         <div>If you leave now, your score won't be saved.</div>
         <div>
-            <label for = "continue">I'm just kidding let me play!</label>
-            <button  id="continue">Continue</button>
+            <label for = "continueBtn">I'm just kidding let me play!</label>
+            <button  id="continueBtn">Continue</button>
         </div>
         <div>
-            <label for = "exit">I don't care!</label>
-            <button  id="exit">Exit</button>
+            <label for = "exitBtn">I don't care!</label>
+            <button  id="exitBtn">Exit</button>
         </div>
     </div>
 

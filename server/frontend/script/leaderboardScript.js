@@ -18,20 +18,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const option = document.createElement("option");
             option.value = date.getDate();
-            option.textContent = `${date.getMonth() + 1}/${date.getDate()}`; // Display as MM/DD
+            option.textContent = `${date.getMonth() + 1}/${date.getDate()}`;  // Display MM/DD
             dateSelect.appendChild(option);
         }
 
         dateSelect.value = today.getDate(); // Set today's date as default dropdown
-
-        } else {
-            console.error("Date dropdown (date-select) not found in the DOM");
-        }
-
-    // Event listener for date changes
-    dateSelect.addEventListener("change", () => {
-        updateLeaderboard();
-    });
+        dateSelect.addEventListener("change", updateLeaderboard);
+    } else {
+        console.error("Date dropdown (date-select) not found in the DOM.");
+    }
 
     // Event listener for language changes
     if (languageSelect) {
@@ -54,12 +49,69 @@ document.addEventListener("DOMContentLoaded", () => {
     updateLeaderboard();
 });
 
+// Fill the table with username and pre-sorted score information
+function fillTable(data) {
+    const leaderboardTable = document.getElementById("box").getElementsByTagName("table")[0];
+    leaderboardTable.innerHTML = `
+        <tr>
+            <th id="user" class="userCol">Username</th>
+            <th id="score" class="scoreCol">Score</th>
+            <th id="words" class="wordsCol">Total Words</th>
+            <th id="longest-word" class="longestWordCol">Longest Word</th>
+        </tr>
+    `; // Clear previous data and set table headers
+
+    if (!Array.isArray(data.users)) {
+        console.error("Unexpected data structure: users is not an array.", data);
+        return;
+    }
+
+    if (data.users.length > 0) {
+        // Populate table rows
+        data.users.forEach((user) => {
+            const row = document.createElement("tr");
+
+            const usernameCell = document.createElement("td");
+            usernameCell.textContent = user.name || "Unknown";
+            row.appendChild(usernameCell);
+
+            const scoreCell = document.createElement("td");
+            scoreCell.textContent = user.score || 0;
+            row.appendChild(scoreCell);
+
+            const wordsCell = document.createElement("td");
+            wordsCell.textContent = user.totalWords || 0; 
+            row.appendChild(wordsCell);
+
+            const longestWordCell = document.createElement("td");
+            longestWordCell.textContent = user.longestWord || "N/A";
+            row.appendChild(longestWordCell);
+
+            leaderboardTable.appendChild(row);
+        });
+    } else {
+        console.log("No users data available for the selected date and language.");
+        const row = document.createElement("tr");
+        const noDataCell = document.createElement("td");
+        noDataCell.textContent = "No leaderboard data available.";
+        noDataCell.colSpan = 4;
+        noDataCell.style.textAlign = "center";
+        row.appendChild(noDataCell);
+        leaderboardTable.appendChild(row);
+    }
+}
+
 // Fetch leaderboard data based on selected date and language
 async function updateLeaderboard() {
-    const date = document.getElementById("date-select").value; 
-    const language = document.getElementById("language-select").value; 
+    const dateSelect = document.getElementById("date-select");
+    const languageSelect = document.getElementById("language-select");
 
-    const url = `/api/scores?date=${date}&language=${language}`; 
+    // Default: today's date and English
+    const date = dateSelect.value || new Date().getDate(); 
+    const language = languageSelect.value || "English"; 
+    const url = `/api/scores?date=${date}&language=${language}`;
+
+    console.log(`Requesting leaderboard for date: ${date}, language: ${language}`);
 
     try {
         const response = await fetch(url);
@@ -69,46 +121,10 @@ async function updateLeaderboard() {
         }
 
         const responseData = await response.json();
-        console.log("Leaderboard data fetched:", responseData); 
+        console.log("Leaderboard data fetched:", responseData);
         fillTable(responseData);
 
     } catch (error) {
         console.error("Error fetching leaderboard data:", error.message);
     }
-}
-
-// Fill the table with username and pre-sorted score information
-function fillTable(data) {
-    const leaderboardTable = document.getElementById("leaderboard-container").getElementsByTagName("table")[0];
-    leaderboardTable.innerHTML = `
-        <tr>
-            <th id="user" class="userCol">Username</th>
-            <th id="score" class="scoreCol">Score</th>
-            <th id="words" class="wordsCol">Total Words</th>
-            <th id="longest-word" class="longestWordCol">Longest Word</th>
-        </tr>
-    `;  // Clear previous data and set table headers
-
-    // Fill each column with the appropriate data
-    data.users.forEach((user) => {
-        const row = document.createElement("tr");
-
-        const usernameCell = document.createElement("td");
-        usernameCell.textContent = user.name;
-        row.appendChild(usernameCell);
-
-        const scoreCell = document.createElement("td");
-        scoreCell.textContent = user.score;
-        row.appendChild(scoreCell);
-
-        const wordsCell = document.createElement("td");
-        wordsCell.textContent = user.totalWords; 
-        row.appendChild(wordsCell);
-
-        const longestWordCell = document.createElement("td");
-        longestWordCell.textContent = user.longestWord || "N/A";
-        row.appendChild(longestWordCell);
-
-        leaderboardTable.appendChild(row);
-    });
 }

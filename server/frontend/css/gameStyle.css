@@ -60,6 +60,8 @@ header h2 {
     display: flex;
     flex-direction: column;
     align-items: flex-end; 
+    justify-content: center;
+    text-align: right;
     gap: 10px; 
 }
 
@@ -196,7 +198,7 @@ header h2 {
 
 #warning-alert{
     position: absolute;
-    margin-top: 20vh;
+    margin-top: 37vh;
     padding: 2vh;
     text-align: center;
     font-size:large;
@@ -209,12 +211,12 @@ header h2 {
     font-size: 7vh;
 }
 
-label, #exit, #continue{
+label, #exitBtn, #continueBtn{
     font-size: 3vh;
     display: inline-block;
 }
 
-#exit, #continue{
+#exitBtn, #continueBtn{
     background-color: #f39c12;
     color: white;
     border: none;
@@ -222,4 +224,9 @@ label, #exit, #continue{
     font-family: 'Arial', sans-serif;
     font-weight: bold;
     padding: 1vh;
+    cursor: pointer;
+}
+
+#exitBtn:hover, #continueBtn:hover {
+    background-color: #005f99;
 }

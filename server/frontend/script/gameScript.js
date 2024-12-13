@@ -8,17 +8,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const readyButton = document.getElementById("ready-button");
     const gameBoard = document.getElementById("game-board");
     const timerDisplay = document.getElementById("time-remaining");
-    const resultsScreen = document.getElementById("results-screen");
     const resultsContainer = document.getElementById("results-container");
     const wordList = document.getElementById("word-list");
-    const continueBtn = document.getElementById("continue-button");
     const currentWordDisplay = document.getElementById("current-word");
     const usernameDisplay = document.getElementById("username-display");
     const homeBtn = document.getElementById("home-btn");
     const skipButton = document.getElementById("skip-btn");
     const hideExplanation = document.getElementById("explanation");
     const warning = document.getElementById("warning-alert");
-    const exitBtn = document.getElementById("exit");
+    const continueBtn = document.getElementById("continueBtn");
+    const exitBtn = document.getElementById("exitBtn");
 
     // Global variables
     let score = 0;
@@ -26,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let selectedLetters = [];  
     let wordsFound = [];     
     let dictionaries = { english: [], german: [] }; 
-    let gridId = null; // Declare a global variable to store gridId
+    let gridId = null;
     let params = new URLSearchParams(window.location.search);
     let selectedLanguage = params.get("lang");
     let username = params.get("user");
@@ -86,40 +85,59 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Event listener to execute the 'Ready' button
-    readyButton.addEventListener("click", () => {
-        readyClicked = true;
-        readyButton.parentElement.classList.add("hidden");
-        readyButton.classList.add("hidden");
-        hideExplanation.style.display = "none";
-        gameBoard.classList.remove("hidden");
-        skipButton.classList.remove("hidden");
+    if (readyButton) {
+        readyButton.addEventListener("click", () => {
+            readyClicked = true;
+            readyButton.parentElement.classList.add("hidden");
+            readyButton.classList.add("hidden");
+            hideExplanation.style.display = "none";
+            gameBoard.classList.remove("hidden");
+            skipButton.classList.remove("hidden");
 
-        fetchGrid();
-        startTimer();
-    });
+            fetchGrid();
+            startTimer();
+        });
+    }
 
-    warning.style.display = "none";
-    // If homepage button is clicked give warning before return to index.html 
-    homeBtn.addEventListener("click", () => {
-        if (!warningDisplay && readyClicked) {
-            warning.style.display = "block";
-            warningDisplay = true;
-        }
-        
-        else if(!warningDisplay){
+    warning.classList.add("hidden");
+     // If homepage button is clicked give warning before return to index.html 
+     if (homeBtn) {
+        homeBtn.addEventListener("click", () => {
+            if (readyClicked) {
+                if (!warningDisplay) {
+                    warning.style.display = "block";
+                    warningDisplay = true;
+                }
+            } else {
+                window.location.href = `http://localhost:3000`;
+            }
+        });
+    }    
+
+    // If exit button is clicked, return to index.html
+    if (exitBtn) {
+        exitBtn.addEventListener("click", () => {
             window.location.href = `http://localhost:3000`;
-        }
-    });
+        });
+    }
 
-    exitBtn.addEventListener("click", () => {
-        window.location.href = `http://localhost:3000`;
-    });
+    // If continue button is clicked, stay on the website
+    if (continueBtn) {
+        continueBtn.addEventListener("click", () => {
+            warning.style.display = "none";
+            warningDisplay = false;
+        });
+    }
 
-    continueBtn.addEventListener("click", () => {
-        warning.style.display = "none";
-        warningDisplay = false;
-    });
-    
+    // Event listener for 'Skip to End' button
+    if (skipButton) {
+        skipButton.addEventListener("click", () => {
+            timer = 0; 
+            clearInterval(timerInterval); 
+            endGame(); 
+        });    
+    }
+
     // Start the countdown timer: 100 seconds
     let timer = 100;
     let timerInterval = null;   
@@ -136,18 +154,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     usernameDisplay.textContent = `Player: ${username}`;
-
-    // Event listener for 'Homepage' button
-    homeBtn.addEventListener("click", () => {
-        window.location.href = `http://localhost:3000`;
-    });
-
-    // Event listener for 'Skip to End' button
-    skipButton.addEventListener("click", () => {
-        timer = 0; // Set time to 0
-        clearInterval(timerInterval); 
-        endGame(); 
-    });    
 
     // Click on a letter once to begin forming a word, then again to finalize a word
     function handleCellClick(cell) {
@@ -188,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
             !wordsFound.includes(currentWord.toLowerCase());
 
         selectedLetters.forEach((letter) => {
-            letter.classList.remove("valid", "invalid", "formingWord"); // Remove all potential classes first
+            letter.classList.remove("valid", "invalid", "formingWord"); 
             if (isValidWord) {
                 letter.classList.add("valid");
             }
