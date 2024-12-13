@@ -11,13 +11,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const resultsScreen = document.getElementById("results-screen");
     const resultsContainer = document.getElementById("results-container");
     const wordList = document.getElementById("word-list");
-    const continueButton = document.getElementById("continue-button");
+    const continueBtn = document.getElementById("continue-button");
     const currentWordDisplay = document.getElementById("current-word");
     const usernameDisplay = document.getElementById("username-display");
     const homeBtn = document.getElementById("home-btn");
     const skipButton = document.getElementById("skip-btn");
     const hideExplanation = document.getElementById("explanation");
-
+    const warning = document.getElementById("warning-alert");
+    const exitBtn = document.getElementById("exit");
 
     // Global variables
     let score = 0;
@@ -29,6 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let params = new URLSearchParams(window.location.search);
     let selectedLanguage = params.get("lang");
     let username = params.get("user");
+    let readyClicked = false;
+    let warningDisplay = false;
 
     // Load dictionaries using a promise
     Promise.all([
@@ -84,6 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Event listener to execute the 'Ready' button
     readyButton.addEventListener("click", () => {
+        readyClicked = true;
         readyButton.parentElement.classList.add("hidden");
         readyButton.classList.add("hidden");
         hideExplanation.style.display = "none";
@@ -92,6 +96,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
         fetchGrid();
         startTimer();
+    });
+
+    warning.style.display = "none";
+    // If homepage button is clicked give warning before return to index.html 
+    homeBtn.addEventListener("click", () => {
+        if (!warningDisplay && readyClicked) {
+            warning.style.display = "block";
+            warningDisplay = true;
+        }
+        
+        else if(!warningDisplay){
+            window.location.href = `http://localhost:3000`;
+        }
+    });
+
+    exitBtn.addEventListener("click", () => {
+        window.location.href = `http://localhost:3000`;
+    });
+
+    continueBtn.addEventListener("click", () => {
+        warning.style.display = "none";
+        warningDisplay = false;
     });
     
     // Start the countdown timer: 100 seconds

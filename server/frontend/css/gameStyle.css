@@ -28,7 +28,6 @@ header h2 {
     margin: 0;
 }
 
-/* Position the header container */
 #header-container {
     display: flex;
     justify-content: space-between;
@@ -49,20 +48,19 @@ header h2 {
 }
 
 #user-info {
-    flex: 1; /* Take up equal space */
+    flex: 1; 
     display: flex;
     flex-direction: column;
     gap: 5px;
-    text-align: center; /* Ensure text is left-aligned */
+    text-align: center;
 }
 
-/* Buttons container: center-aligned */
 #buttons-container {
-    flex: 1; /* Take up equal space */
+    flex: 1; 
     display: flex;
-    flex-direction: column; /* Stack buttons vertically */
-    align-items: flex-end; /* Center buttons horizontally */
-    gap: 10px; /* Add space between buttons */
+    flex-direction: column;
+    align-items: flex-end; 
+    gap: 10px; 
 }
 
 #home-btn {
@@ -185,4 +183,43 @@ header h2 {
     font-size:large;
     border: 5px solid #005f99;
     border-radius: 5px;
+}
+
+#current-word {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#warning{
+    text-align: center;
+}
+
+#warning-alert{
+    position: absolute;
+    margin-top: 20vh;
+    padding: 2vh;
+    text-align: center;
+    font-size:large;
+    border-radius: 2vh;
+    background-color: brown;
+    color: #eaf7ff;
+    font-family: 'Arial', sans-serif;
+    width: 50%;
+    height: 40%;
+    font-size: 7vh;
+}
+
+label, #exit, #continue{
+    font-size: 3vh;
+    display: inline-block;
+}
+
+#exit, #continue{
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 1vh;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    padding: 1vh;
 }

@@ -22,6 +22,7 @@ const User = require('./user');
 const WordGrid = require('./wordGrid');
 const Score = require('./scores');
 
+
 // Parse JSON
 app.use(express.json());
 

@@ -68,7 +68,8 @@ table {
 }
 
 #user,
-#score {
+#score,
+#words {
     text-align: center;
 }
 
