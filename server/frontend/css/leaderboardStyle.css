@@ -35,16 +35,39 @@ body {
     position: absolute;
     top: 3vh;
     left: 4vh;
-    padding: 10px;
+    padding: 2vh;
     font-size: 4vh;
     background-color: #f39c12;
     color: white;
     border: none;
     border-radius: 1vh;
     font-family: 'Arial', sans-serif;
+    font-weight: bold;
 }
 
 #home-btn:hover {
+    background-color: #007acc;
+    cursor: pointer;
+}
+
+#faq-btn{
+    position: absolute;
+    top: 3vh;
+    right: 4vh;
+    padding: 2vh;;
+    font-size: 4vh;
+    background-color: #f39c12;
+    color: white;
+    padding: 1vh;
+    border-radius: 1vh;
+    border: none;
+    cursor: pointer;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    font-size: 4vh;
+}
+
+#faq-btn:hover{
     background-color: #007acc;
     cursor: pointer;
 }

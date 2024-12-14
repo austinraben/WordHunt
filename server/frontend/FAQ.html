@@ -1,0 +1,94 @@
+<!--
+Description: The structure for the help page interface. With clickable 
+questions and viewable summaries.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Word Hunt - FAQ</title>
+    <link rel="stylesheet" href="css/faqStyle.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>FAQ</h1>
+        <h2>Frequently Asked Questions</h2>
+        <button id="home-btn">Homepage</button>
+    </header>
+
+    <div id=faq>
+        <details>
+            <summary>How to play?</summary>
+            <div class=answer>
+                The word hunt game is played by building words of three or more
+                characters.<br>
+                1) First click a letter.<br>
+                2) Drag your mouse over to the next letter in the word you want to
+                form. It can be formed vertically, horizontally or diagonally,<br>
+                but each successive letter must be a bordering letter.<br>
+                3) When you build a word of 3+ length that is valid the word will
+                turn green. To end the word, click again on the final letter.<br>
+                4) If you attempt to trace the same word again it will appear gray
+                in the board.<br>
+                5) Attempt to build as many words as you can.
+            </div>
+        </details>
+
+        <details>
+            <summary>How do points work?</summary>
+            <div class=answer>
+                Points are assigned according to the length of the word.<br><br>
+                3 letters: 100 points<br>
+                4 letters: 400 points<br>
+                5 letters: 800 points<br>
+                6 letters: 1400 points<br><br>
+                Each additional letter in a word is 400 additional points
+
+            </div>
+        </details>
+
+        <details>
+            <summary>Is there only one board?</summary>
+            <div class=answer>
+                Everyday an English and German board is generated. For that date
+                those two boards are the only available boards and will be changed
+                the next day. So play today, before they're gone!
+            </div>
+        </details>
+
+        <details>
+            <summary>How does the Leaderboard work?</summary>
+            <div class=answer>
+                Each board has its own leaderboard. There are two dropdown menus:
+                date and language. To view the leaderboard select the date and
+                language of your desired board. <br>
+                For example if I wanted to see the English board's leaderboard for
+                12/13 I would select 12/13 and English.
+            </div>
+        </details>
+
+        <details>
+            <summary>How do I check my score?</summary>
+            <div class=answer>
+                Scores can be viewed in the leaderboard. Simply locate your
+                username and you will be able to see your top
+                score along with your longest word and word count.
+            </div>
+        </details>
+
+        <details>
+            <summary>What happens if I play the same board twice?</summary>
+            <div class=answer>
+                You may play the same board as many times as you want! However,
+                only your top score will be saved to the leaderboard, along with
+                your other stats.
+            </div>
+        </details>
+    </div>
+</body>
+
+</html>

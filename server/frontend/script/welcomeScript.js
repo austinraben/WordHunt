@@ -12,10 +12,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const usernameExistsDiv = document.getElementById("username-exists");
     const continueBtn = document.getElementById("continue-btn");
     const cancelBtn = document.getElementById("cancel-btn");
+    const faqBtn = document.getElementById("faq-btn");
 
     // Event listener for the "Leaderboard" button
     leaderboardBtn.addEventListener("click", () => {
         navigateTo("leaderboard");
+    });
+
+    // Event listener for the "FAQ" button
+    faqBtn.addEventListener("click", () => {
+        navigateTo("FAQ");
     });
 
     // Enable game button upon username input
@@ -23,6 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const username = usernameInput.value.trim().toLowerCase()
         gameBtn.disabled = username === "";
     });
+
+
 
     // Event listener for "Game" button
     document.getElementById("welcome-form").addEventListener("submit", async (event) => {

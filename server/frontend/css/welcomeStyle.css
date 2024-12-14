@@ -98,7 +98,7 @@ select {
     justify-content: space-between;
     /* Align buttons to the left and right */
     margin-top: 30px;
-    gap: 10px;
+    gap: 2vh;
 }
 
 /* Individual Buttons */
@@ -112,6 +112,7 @@ select {
     /* Each button takes up 48% of the container width */
     cursor: pointer;
     font-family: 'Arial', sans-serif;
+    margin-bottom: 2vh;
 }
 
 #game-btn {
@@ -140,4 +141,26 @@ select {
     background-color: #ccc;
     /* Grey when disabled */
     cursor: not-allowed;
+}
+
+#faq-btn{
+    background-color: #eaf7ff;
+    color: black;
+    padding: 1vh;
+    left: 50%;
+    border-radius: 5px;
+    border: 1px solid black;
+    width: 20%;
+    cursor: pointer;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    font-size: 3vh;
+    margin: auto;
+    text-align: center;
+    display: block;
+}
+
+#faq-btn:hover{
+    background-color: white;
+    color: #000000;
 }
