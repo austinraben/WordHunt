@@ -7,8 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const homeBtn = document.getElementById("home-btn");
 
     // Event listener for home button
-    homeBtn.addEventListener("click", () => {
+    if(homeBtn){
+        homeBtn.addEventListener("click", () => {
         window.location.href = `http://localhost:3000`;
     });
+}
 
 });
