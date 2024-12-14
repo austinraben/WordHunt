@@ -4,7 +4,7 @@ Client-side JavaScript for game.html (word hunt interface)
 */
 
 document.addEventListener("DOMContentLoaded", () => {
-    // DOM Elements
+    // Initialize DOM Elements
     const readyButton = document.getElementById("ready-button");
     const gameBoard = document.getElementById("game-board");
     const timerDisplay = document.getElementById("time-remaining");
@@ -16,8 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const warning = document.getElementById("warning-alert");
     const continueBtn = document.getElementById("continueBtn");
     const exitBtn = document.getElementById("exitBtn");
+    const grid = document.getElementById("game-grid");
 
-    // Global variables
+    // Initialize global variables
     let score = 0;
     let currentWord = "";
     let selectedLetters = [];
@@ -29,6 +30,104 @@ document.addEventListener("DOMContentLoaded", () => {
     let username = params.get("user");
     let readyClicked = false;
     let warningDisplay = false;
+    let touchedLetters = [];
+    let currentTouchWord = "";
+    let mouseIsDown = false;
+
+    // Is the user using mobile (touch-based) or computer (click-based)
+    const isMobile = isMobileDevice();
+    function isMobileDevice() {
+        return /Mobi|Android/i.test(navigator.userAgent);
+    }    
+
+    // Mobile: touch-based interaction
+    if (isMobile) {
+
+        // Start touching: Add letter to word
+        grid.addEventListener("touchstart", (event) => {
+            event.preventDefault();
+            const cell = event.target.closest(".grid-cell");
+            if (cell) {
+                currentTouchWord += cell.textContent;
+                addToWord(cell);
+                touchedLetters = [cell];
+            }
+        });
+
+        // Dragging a finger: Add letter to word if a neighbor
+        grid.addEventListener("touchmove", (event) => {
+            event.preventDefault(); 
+
+            // Track if the finger is on a cell
+            const touch = event.touches[0]; 
+            const element = document.elementFromPoint(touch.clientX, touch.clientY); 
+            if (!element) return; 
+
+            const cell = element.closest(".grid-cell");
+            if (cell && !touchedLetters.includes(cell)) {
+                const lastCell = touchedLetters[touchedLetters.length - 1];
+                if (lastCell && isNeighbor(lastCell, cell)) {
+                    touchedLetters.push(cell);
+                    currentTouchWord += cell.textContent;
+                    addToWord(cell);
+                    currentWordDisplay.textContent = currentTouchWord;
+                }
+            }
+        });    
+        
+        // Lifting a finger: Finalize word
+        grid.addEventListener("touchend", (event) => {
+            event.preventDefault();
+            if (touchedLetters.length > 0) {
+                finalizeWord(touchedLetters, currentTouchWord, true);
+            }
+
+            touchedLetters = [];
+            currentTouchWord = "";
+        });
+
+    // Desktop: "click and hold" OR "click twice" based interaction
+    } else {
+
+        // Mouse pressed down: Add letter to word 
+        grid.addEventListener("mousedown", (event) => {
+            const cell = event.target.closest(".grid-cell");
+            if (cell) {
+                mouseIsDown = true;  // Track if click is being held down
+                addToWord(cell);
+                clickedCell = cell;
+            }
+        });
+        
+        // Finger lifted off mouse click: finalize word
+        document.addEventListener("mouseup", () => {
+            if (mouseIsDown) {
+                    finalizeWord(selectedLetters, currentWord, false);
+            }
+            mouseIsDown = false;
+            clickedCell = null;
+        });
+        
+        // Click is held down and hovering a letter: Add to word
+        grid.addEventListener("mouseover", (event) => {
+            if (mouseIsDown) {
+                const cell = event.target.closest(".grid-cell");
+                if (cell && !selectedLetters.includes(cell)) {
+                    handleCellHover(cell);
+                }
+            }
+        });
+    }  
+    
+    // Is the URL the IP address or domain name
+    const baseHost = window.location.host;
+    let baseURL;
+
+    if (baseHost === "64.23.152.52:3000") {
+        baseURL = "http://64.23.152.52:3000";
+    } else {
+        baseURL = "http://www.DailyWordHunt.com";
+    }
 
     // Load dictionaries using a promise
     Promise.all([
@@ -75,11 +174,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 cell.dataset.index = `${rowIndex}-${colIndex}`;
                 grid.appendChild(cell);
 
-                // Event listeners for interacting with the grid
-                cell.addEventListener("click", () => handleCellClick(cell));
+                // Event listeners for cell hovering
                 cell.addEventListener("mouseover", () => handleCellHover(cell));
             });
         });
+        grid.classList.remove("hidden");
     }
 
     // Event listener to execute the 'Ready' button
@@ -97,17 +196,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    warning.classList.add("hidden");
+    warning.style.display = "none";
     // If homepage button is clicked give warning before return to index.html 
     if (homeBtn) {
         homeBtn.addEventListener("click", () => {
             if (readyClicked) {
-                if (!warningDisplay) {
-                    warning.style.display = "block";
-                    warningDisplay = true;
-                }
+                warning.classList.remove("hidden");
+                warning.style.display = "block";
             } else {
-                window.location.href = `http://localhost:3000`;
+                window.location.href = baseURL;
             }
         });
     }
@@ -115,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // If exit button is clicked, return to index.html
     if (exitBtn) {
         exitBtn.addEventListener("click", () => {
-            window.location.href = `http://localhost:3000`;
+            window.location.href = baseURL;
         });
     }
 
@@ -151,80 +248,88 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1000);
     }
 
-    usernameDisplay.textContent = `Player: ${username}`;
-
-    // Click on a letter once to begin forming a word, then again to finalize a word
-    function handleCellClick(cell) {
-        if (selectedLetters.includes(cell)) {
-            finalizeWord();
-        } else {
-            addToWord(cell);
-        }
-    }
+    // Display the user's name
+    usernameDisplay.textContent = `Player: ${username}`;  
 
     // Hover over letters to add to a word
     function handleCellHover(cell) {
-        if (
-            selectedLetters.length > 0 &&
-            isNeighbor(selectedLetters[selectedLetters.length - 1], cell) &&
-            !selectedLetters.includes(cell)
-        ) {
+        if (!cell || !selectedLetters.length) return;
+        const lastCell = selectedLetters[selectedLetters.length - 1];
+        if (isNeighbor(lastCell, cell) && !selectedLetters.includes(cell)) {
             addToWord(cell);
         }
     }
 
     // Check if two cells are neighbors
     function isNeighbor(cell1, cell2) {
+        if (!cell1 || !cell2) return false;
         const [row1, col1] = cell1.dataset.index.split("-").map(Number);
         const [row2, col2] = cell2.dataset.index.split("-").map(Number);
-        return Math.abs(row1 - row2) <= 1 && Math.abs(col1 - col2) <= 1;
+        const result = Math.abs(row1 - row2) <= 1 && Math.abs(col1 - col2) <= 1;
+        return result;
     }
 
     // Add a letter to the current word and mark all its letters as green if a valid word
     function addToWord(cell) {
+        if (selectedLetters.includes(cell)) {
+            return;  // Prevent adding the same cell again (cheating!)
+        }
+
         selectedLetters.push(cell);
         currentWord += cell.textContent;
-        currentWordDisplay.textContent = currentWord;
 
-        // A word is valid if more than 3 letters in the dictionary and not already found
+        currentWordDisplay.textContent = currentWord;
+    
+        // A word is valid if it has 3+ letters, is in the dictionary, and isn't already found
         const isValidWord = currentWord.length >= 3 &&
             dictionaries[selectedLanguage.toLowerCase()].includes(currentWord.toLowerCase()) &&
             !wordsFound.includes(currentWord.toLowerCase());
 
+        // Update the styling for the current letters
         selectedLetters.forEach((letter) => {
-            letter.classList.remove("valid", "invalid", "formingWord");
+            letter.classList.remove("valid", "invalid", "formingWord", "selected");
             if (isValidWord) {
                 letter.classList.add("valid");
-            }
-            else if (wordsFound.includes(currentWord.toLowerCase())) {
+            } else if (wordsFound.includes(currentWord.toLowerCase())) {
                 letter.classList.add("invalid");
-            }
-            else {
+            } else {
                 letter.classList.add("formingWord");
             }
         });
     }
 
     // Process a completed word and decide whether to add points
-    function finalizeWord() {
+    function finalizeWord(letters = selectedLetters, word = currentWord, isTouch = false) {            
         if (
-            currentWord.length >= 3 &&
-            dictionaries[selectedLanguage.toLowerCase()].includes(currentWord.toLowerCase()) &&
-            !wordsFound.includes(currentWord.toLowerCase())
+            word.length >= 3 &&
+            dictionaries[selectedLanguage.toLowerCase()].includes(word.toLowerCase()) &&
+            !wordsFound.includes(word.toLowerCase())
         ) {
             // If the word is valid, update the wordsFound list, and the word-count and score displays
-            wordsFound.push(currentWord.toLowerCase());
-            score += calculateWordScore(currentWord);
+            wordsFound.push(word.toLowerCase());
+            score += calculateWordScore(word);
             document.getElementById("word-count-display").querySelector("span").textContent = wordsFound.length;
             document.getElementById("score-display").querySelector("span").textContent = score;
+        } else {
+            console.log("finalizeWord - Word is invalid or already found:", word);
         }
+    
+        // Reset the letters and word
+        letters.forEach((letter) => {
+            letter.classList.remove("valid", "invalid", "formingWord", "selected");
+        }); 
 
-        // Reset current word to allow for a new word
-        selectedLetters.forEach((letter) => letter.classList.remove("valid", "invalid", "formingWord", "selected"));
         selectedLetters = [];
         currentWord = "";
         currentWordDisplay.textContent = "";
-    }
+        if (isTouch) {
+            touchedLetters.forEach((cell) => {
+                cell.classList.remove("valid", "invalid", "formingWord", "selected");
+            });
+            touchedLetters = [];
+            currentTouchWord = "";
+        }
+    }    
 
     // Calculate the score for a word
     function calculateWordScore(word) {

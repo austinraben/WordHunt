@@ -9,6 +9,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const languageSelect = document.getElementById("language-select");
     const homeBtn = document.getElementById("home-btn");
 
+    // Determine the base URL
+    const baseHost = window.location.host;
+    let baseURL;
+
+    if (baseHost === "64.23.152.52:3000") {
+        baseURL = "http://64.23.152.52:3000";
+    } else {
+        baseURL = "http://www.DailyWordHunt.com";
+    }
+
     // Populate the date dropdown with the last 7 days
     if (dateSelect) {
         const today = new Date();
@@ -41,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Event listener for home button
     if (homeBtn) {
         homeBtn.addEventListener("click", () => {
-            window.location.href = `http://localhost:3000`;
+            window.location.href = baseURL;
         });
     }
 

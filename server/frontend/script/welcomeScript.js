@@ -13,6 +13,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const continueBtn = document.getElementById("continue-btn");
     const cancelBtn = document.getElementById("cancel-btn");
 
+    // Determine the base URL
+    const baseHost = window.location.host;
+    let baseURL;
+
+    if (baseHost === "64.23.152.52:3000") {
+        baseURL = "http://64.23.152.52:3000";
+    } else {
+        baseURL = "http://www.DailyWordHunt.com";
+    }
+
     // Event listener for the "Leaderboard" button
     leaderboardBtn.addEventListener("click", () => {
         navigateTo("leaderboard");
@@ -69,6 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const language = document.getElementById("language-select").value;
         const username = usernameInput.value.trim().toLowerCase();
 
-        window.location.href = `http://localhost:3000/${mode}?lang=${language}&user=${username}`;
+        window.location.href = `${baseURL}/${mode}?lang=${language}&user=${username}`;
     }
 });
