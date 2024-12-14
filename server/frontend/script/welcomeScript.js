@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Event listener for the "FAQ" button
     faqBtn.addEventListener("click", () => {
-        navigateTo("FAQ");
+        window.location.href = `/FAQ`;
     });
 
     // Enable game button upon username input
