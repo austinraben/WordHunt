@@ -39,6 +39,9 @@ app.get('/game', (req, res) => {
 app.get('/leaderboard', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/leaderboard.html'));
 });
+app.get('/FAQ', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/FAQ.html'));
+});
 
 // GET to find user details in 'User' schema
 app.get('/get-user/:username', async (req, res) => {

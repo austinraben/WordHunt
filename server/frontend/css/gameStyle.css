@@ -59,6 +59,7 @@ header h2 {
     max-width: 30%;
 }
 
+
 #buttons-container {
     flex: 1;
     display: flex;
@@ -67,6 +68,26 @@ header h2 {
     justify-content: left;
 
 }
+
+#faq-btn {
+    padding: 10px 20px;
+    font-size: 2vh;
+    background-color: #5356a0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: left;
+    margin-bottom: 2vh;
+    
+}
+
+#faq-btn:hover {
+    background-color: #ffffff;
+    color: black;
+    cursor: pointer;
+}
+
 
 #home-btn {
     padding: 10px 20px;

@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const usernameExistsDiv = document.getElementById("username-exists");
     const continueBtn = document.getElementById("continue-btn");
     const cancelBtn = document.getElementById("cancel-btn");
+    const faqBtn = document.getElementById("faq-btn");
 
     // Determine the base URL
     const baseHost = window.location.host;
@@ -28,11 +29,18 @@ document.addEventListener("DOMContentLoaded", () => {
         navigateTo("leaderboard");
     });
 
+    // Event listener for the "FAQ" button
+    faqBtn.addEventListener("click", () => {
+        window.location.href = `/FAQ`;
+    });
+
     // Enable game button upon username input
     usernameInput.addEventListener("input", () => {
         const username = usernameInput.value.trim().toLowerCase()
         gameBtn.disabled = username === "";
     });
+
+
 
     // Event listener for "Game" button
     document.getElementById("welcome-form").addEventListener("submit", async (event) => {
