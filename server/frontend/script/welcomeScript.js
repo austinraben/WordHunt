@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
         navigateTo("leaderboard");
     });
 
-    // Event listener for the "Leaderboard" button
+    // Event listener for the "Game" button
     gameBtn.addEventListener("click", () => {
         navigateTo("game");
     });
