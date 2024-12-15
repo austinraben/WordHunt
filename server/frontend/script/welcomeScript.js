@@ -19,6 +19,11 @@ document.addEventListener("DOMContentLoaded", () => {
         navigateTo("leaderboard");
     });
 
+    // Event listener for the "Leaderboard" button
+    gameBtn.addEventListener("click", () => {
+        navigateTo("game");
+    });
+
     // Event listener for the "FAQ" button
     faqBtn.addEventListener("click", () => {
         window.location.href = `/FAQ`;
