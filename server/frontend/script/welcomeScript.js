@@ -87,6 +87,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const language = document.getElementById("language-select").value;
         const username = usernameInput.value.trim().toLowerCase();
 
+        if (mode === "game") {
+            console.log(`Redirecting to: ${baseURL}/${mode}?lang=${language}&user=${username}`);
+        }
+        
         window.location.href = `${baseURL}/${mode}?lang=${language}&user=${username}`;
     }
 });
